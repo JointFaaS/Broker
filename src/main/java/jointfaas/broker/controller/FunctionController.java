@@ -1,10 +1,10 @@
 package jointfaas.broker.controller;
 
+import jointfaas.broker.controller.pojo.FunctionCreationRequest;
+import jointfaas.broker.controller.pojo.FunctionResponse;
 import jointfaas.broker.service.FunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -14,7 +14,14 @@ public class FunctionController {
     private FunctionService functionService;
 
     @PostMapping("/function")
-    synchronized public String userSolve(@RequestBody String functionCreation) throws IOException {
+    public String createFunction(@RequestBody FunctionCreationRequest functionCreationRequest) throws IOException {
         return "";
+    }
+
+    @GetMapping("/function/{id}")
+    public FunctionResponse getFunction(@PathVariable String id) {
+        FunctionResponse response = new FunctionResponse();
+
+        return response;
     }
 }

@@ -45,6 +45,12 @@
       <artifactId>tomcat-embed-jasper</artifactId>
       <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.61</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
