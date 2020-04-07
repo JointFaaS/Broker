@@ -1,20 +1,20 @@
 package jointfaas.broker.service;
 
-import jointfaas.broker.service.pojo.Function;
+import jointfaas.client.pojo.Function;
 
 import java.nio.ByteBuffer;
 import java.util.List;
 
 public interface FunctionService {
-    void createFunction(String funcName, int timeout, int memorySize, String env, String code);
+    void createFunction(String funcName, String timeout, String memorySize, String env, String code) throws Exception;
 
     Function getFunction(String id);
 
     List<Function> getFunctions();
 
-    ByteBuffer invokeFunction(String funcName, String args);
+    byte[] invokeFunction(String funcName, String args);
 
-    void deleteFunction(String funcName);
+    void deleteFunction(String funcName) throws Exception;
 
     void refreshManagerState();
 

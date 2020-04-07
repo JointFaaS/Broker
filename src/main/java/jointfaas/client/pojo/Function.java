@@ -1,4 +1,4 @@
-package jointfaas.broker.service.pojo;
+package jointfaas.client.pojo;
 
 public class Function {
     private String funcName;

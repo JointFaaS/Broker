@@ -14,7 +14,17 @@ public class FunctionController {
     private FunctionService functionService;
 
     @PostMapping("/function")
-    public String createFunction(@RequestBody FunctionCreationRequest functionCreationRequest) throws IOException {
+    public String createFunction(@RequestBody FunctionCreationRequest functionCreationRequest) {
+        try {
+            functionService.createFunction(
+                    functionCreationRequest.getFuncName(),
+                    functionCreationRequest.getTimeout(),
+                    functionCreationRequest.getMemorySize(),
+                    functionCreationRequest.getEnv(),
+                    functionCreationRequest.getCodeZip());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         return "";
     }
 

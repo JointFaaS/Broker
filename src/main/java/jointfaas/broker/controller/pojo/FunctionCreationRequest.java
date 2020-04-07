@@ -8,7 +8,7 @@ public class FunctionCreationRequest {
 	private String funcName;
 
 	@JSONField(name="memorySize")
-	private int memorySize;
+	private String memorySize;
 
 	@JSONField(name="codeZip")
 	private String codeZip;
@@ -17,7 +17,7 @@ public class FunctionCreationRequest {
 	private String env;
 
 	@JSONField(name="timeout")
-	private int timeout;
+	private String timeout;
 
 	public void setFuncName(String funcName){
 		this.funcName = funcName;
@@ -27,11 +27,11 @@ public class FunctionCreationRequest {
 		return funcName;
 	}
 
-	public void setMemorySize(int memorySize){
+	public void setMemorySize(String memorySize){
 		this.memorySize = memorySize;
 	}
 
-	public int getMemorySize(){
+	public String getMemorySize(){
 		return memorySize;
 	}
 
@@ -51,11 +51,11 @@ public class FunctionCreationRequest {
 		return env;
 	}
 
-	public void setTimeout(int timeout){
+	public void setTimeout(String timeout){
 		this.timeout = timeout;
 	}
 
-	public int getTimeout(){
+	public String getTimeout(){
 		return timeout;
 	}
 

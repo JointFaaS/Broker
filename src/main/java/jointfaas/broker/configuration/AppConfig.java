@@ -1,13 +1,13 @@
 package jointfaas.broker.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@PropertySource(value = "classpath:appconfig.yml")
+@ConfigurationProperties(prefix = "manager")
 public class AppConfig {
 
     @Value("${manager}")
