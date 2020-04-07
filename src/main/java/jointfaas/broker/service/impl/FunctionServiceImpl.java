@@ -11,8 +11,7 @@ import jointfaas.client.pojo.InvokeFunctionInput;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
@@ -20,11 +19,9 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class FunctionServiceImpl implements FunctionService {
-    private final AppConfig appConfig;
-
     private Vector<Client> clients;
+
     public FunctionServiceImpl(AppConfig appConfig) throws Exception {
-        this.appConfig = appConfig;
         this.clients = new Vector<>();
         for (String addr: appConfig.getManagers()) {
             clients.add(new ClientWebClientImpl(addr));
@@ -49,12 +46,8 @@ public class FunctionServiceImpl implements FunctionService {
                 throw new Exception();
                 // TODO: make exception typical
             }
-        }catch (InterruptedException ie) {
+        }catch (InterruptedException e) {
 
-        }catch (WebClientResponseException e) {
-            System.out.println(e.getResponseBodyAsString());
-            throw e;
-            // TODO
         }
     }
 
@@ -88,7 +81,7 @@ public class FunctionServiceImpl implements FunctionService {
                 throw new Exception();
                 // TODO: make exception typical
             }
-        }catch (InterruptedException ie) {
+        }catch (InterruptedException e) {
 
         }
     }

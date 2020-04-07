@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.BodyExtractors;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.net.URL;
 import java.nio.ByteBuffer;
@@ -30,58 +31,89 @@ public class ClientWebClientImpl implements Client {
 
     @Override
     public CreateFunctionOutput createFunction(CreateFunctionInput createFunctionInput) {
-        return wc
-                .post()
-                .uri("/create")
-                .body(BodyInserters.fromValue(createFunctionInput))
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .bodyToMono(CreateFunctionOutput.class)
-                .block();
+        try {
+            return wc
+                    .post()
+                    .uri("/create")
+                    .body(BodyInserters.fromValue(createFunctionInput))
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .bodyToMono(CreateFunctionOutput.class)
+                    .block();
+        }catch (WebClientResponseException e) {
+            System.out.println(e.getResponseBodyAsString());
+            // TODO
+            return null;
+        }
     }
 
     @Override
     public Function getFunction(String id) {
-        return wc
-                .get()
-                .uri(uriBuilder -> uriBuilder.path("/get")
-                                .queryParam("funcName", id)
-                                .build())
-                .retrieve()
-                .bodyToMono(Function.class)
-                .block();
+        try {
+            return wc
+                    .get()
+                    .uri(uriBuilder -> uriBuilder.path("/get")
+                            .queryParam("funcName", id)
+                            .build())
+                    .retrieve()
+                    .bodyToMono(Function.class)
+                    .block();
+        }catch (WebClientResponseException e) {
+            System.out.println(e.getResponseBodyAsString());
+            // TODO
+            return null;
+        }
     }
 
     @Override
     public List<Function> getFunctions() {
-        return new ArrayList<Function>(Arrays.asList(wc
-                .get()
-                .uri("/list")
-                .retrieve()
-                .bodyToMono(Function[].class)
-                .block()));
+        try {
+            return new ArrayList<Function>(Arrays.asList(wc
+                    .get()
+                    .uri("/list")
+                    .retrieve()
+                    .bodyToMono(Function[].class)
+                    .block()));
+        }catch (WebClientResponseException e) {
+            System.out.println(e.getResponseBodyAsString());
+            // TODO
+            return null;
+        }
     }
 
     @Override
     public InvokeFunctionOutput invokeFunction(InvokeFunctionInput invokeFunctionInput) {
-        return new InvokeFunctionOutput(200, wc
-                .post()
-                .uri("/create")
-                .body(BodyInserters.fromValue(invokeFunctionInput))
-                .retrieve()
-                .bodyToMono(byte[].class)
-                .block());
+        try {
+            return new InvokeFunctionOutput(200, wc
+                    .post()
+                    .uri("/invoke")
+                    .body(BodyInserters.fromValue(invokeFunctionInput))
+                    .retrieve()
+                    .bodyToMono(byte[].class)
+                    .block());
+        }catch (WebClientResponseException e) {
+            System.out.println(e.getResponseBodyAsString());
+            // TODO
+            return null;
+        }
     }
 
     @Override
     public DeleteFunctionOutput deleteFunction(DeleteFunctionInput deleteFunctionInput) {
-        return wc
-                .post()
-                .uri("/delete")
-                .body(BodyInserters.fromValue(deleteFunctionInput))
-                .retrieve()
-                .bodyToMono(DeleteFunctionOutput.class)
-                .block();
+        try {
+            return new DeleteFunctionOutput(wc
+                    .post()
+                    .uri(uriBuilder -> uriBuilder.path("/delete")
+                                    .queryParam("funcName", deleteFunctionInput.getFuncName())
+                                    .build())
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block());
+        }catch (WebClientResponseException e) {
+            System.out.println(e.getResponseBodyAsString());
+            // TODO
+            return null;
+        }
     }
 
 }

@@ -1,54 +1,96 @@
 package jointfaas.client.pojo;
 
+import java.util.Map;
+
 public class Function {
-    private String funcName;
-
-    private int memorySize;
-
-    private String env;
-
+    private String functionName;
+    private String description;
+    private String runtime;
+    private String handler;
     private int timeout;
+    private long memorySize;
+    private long codeSize;
+    private String codeChecksum;
+    private Map<String, String>  environmentVariables;
+    private String createdTime;
 
-    public void setFuncName(String funcName){
-        this.funcName = funcName;
+    public String getFunctionName() {
+        return functionName;
     }
 
-    public String getFuncName(){
-        return funcName;
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
     }
 
-    public void setMemorySize(int memorySize){
-        this.memorySize = memorySize;
+    public String getDescription() {
+        return description;
     }
 
-    public int getMemorySize(){
-        return memorySize;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setEnv(String env){
-        this.env = env;
+    public String getRuntime() {
+        return runtime;
     }
 
-    public String getEnv(){
-        return env;
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
     }
 
-    public void setTimeout(int timeout){
-        this.timeout = timeout;
+    public String getHandler() {
+        return handler;
     }
 
-    public int getTimeout(){
+    public void setHandler(String handler) {
+        this.handler = handler;
+    }
+
+    public int getTimeout() {
         return timeout;
     }
 
-    @Override
-    public String toString(){
-        return
-                "FunctionsItem{" +
-                        "funcName = '" + funcName + '\'' +
-                        ",memorySize = '" + memorySize + '\'' +
-                        ",env = '" + env + '\'' +
-                        ",timeout = '" + timeout + '\'' +
-                        "}";
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+
+    public long getMemorySize() {
+        return memorySize;
+    }
+
+    public void setMemorySize(long memorySize) {
+        this.memorySize = memorySize;
+    }
+
+    public long getCodeSize() {
+        return codeSize;
+    }
+
+    public void setCodeSize(long codeSize) {
+        this.codeSize = codeSize;
+    }
+
+    public String getCodeChecksum() {
+        return codeChecksum;
+    }
+
+    public void setCodeChecksum(String codeChecksum) {
+        this.codeChecksum = codeChecksum;
+    }
+
+    public Map<String, String> getEnvironmentVariables() {
+        return environmentVariables;
+    }
+
+    public void setEnvironmentVariables(Map<String, String> environmentVariables) {
+        this.environmentVariables = environmentVariables;
+    }
+
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
     }
 }
