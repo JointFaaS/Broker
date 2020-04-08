@@ -12,7 +12,7 @@ public interface FunctionService {
 
     List<Function> getFunctions();
 
-    byte[] invokeFunction(String funcName, String args);
+    byte[] invokeFunction(String funcName, String args, String enableNative);
 
     void deleteFunction(String funcName) throws Exception;
 

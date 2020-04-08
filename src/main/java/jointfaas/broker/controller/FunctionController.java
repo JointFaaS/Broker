@@ -7,14 +7,16 @@ import jointfaas.broker.controller.pojo.FunctionResponse;
 import jointfaas.broker.service.FunctionService;
 import jointfaas.client.pojo.Function;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@CrossOrigin
 public class FunctionController {
     @Autowired
     private FunctionService functionService;
@@ -36,13 +38,17 @@ public class FunctionController {
     }
 
     @PostMapping("/invoke")
-    public byte[] invokeFunction(@RequestBody FunctionInvocationRequest functionInvocationRequest) {
+    public String invokeFunction(@RequestBody FunctionInvocationRequest functionInvocationRequest, HttpServletResponse response) {
         try {
-            return functionService.invokeFunction(functionInvocationRequest.getFuncName(), functionInvocationRequest.getArgs());
+            response.getOutputStream().write(
+                    functionService.invokeFunction(
+                            functionInvocationRequest.getFuncName(),
+                            functionInvocationRequest.getArgs(),
+                            functionInvocationRequest.getEnableNative()));
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return new byte[0];
+        return "";
     }
 
     @DeleteMapping("/function/{id}")

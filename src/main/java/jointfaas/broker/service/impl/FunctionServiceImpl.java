@@ -62,8 +62,8 @@ public class FunctionServiceImpl implements FunctionService {
     }
 
     @Override
-    public byte[] invokeFunction(String funcName, String args) {
-        return clients.firstElement().invokeFunction(new InvokeFunctionInput(funcName, args)).getResponse();
+    public byte[] invokeFunction(String funcName, String args, String enableNative) {
+        return clients.firstElement().invokeFunction(new InvokeFunctionInput(funcName, args, enableNative)).getResponse();
     }
 
     @Override
