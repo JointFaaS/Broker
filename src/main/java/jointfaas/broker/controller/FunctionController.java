@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@CrossOrigin
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class FunctionController {
     @Autowired
     private FunctionService functionService;
@@ -38,7 +38,7 @@ public class FunctionController {
     }
 
     @PostMapping("/invoke")
-    public String invokeFunction(@RequestBody FunctionInvocationRequest functionInvocationRequest, HttpServletResponse response) {
+    public void invokeFunction(@RequestBody FunctionInvocationRequest functionInvocationRequest, HttpServletResponse response) {
         try {
             response.getOutputStream().write(
                     functionService.invokeFunction(
@@ -48,7 +48,6 @@ public class FunctionController {
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
     }
 
     @DeleteMapping("/function/{id}")

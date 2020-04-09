@@ -2,6 +2,10 @@ package jointfaas.client.pojo;
 
 public class DeleteFunctionOutput {
     private String response;
+
+    public DeleteFunctionOutput() {
+    }
+
     public DeleteFunctionOutput(String res) {
         this.response = res;
     }

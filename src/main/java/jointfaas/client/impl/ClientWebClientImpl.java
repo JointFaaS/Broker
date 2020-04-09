@@ -28,7 +28,6 @@ public class ClientWebClientImpl implements Client {
 
     private WebClient wc;
 
-
     @Override
     public CreateFunctionOutput createFunction(CreateFunctionInput createFunctionInput) {
         try {
@@ -43,7 +42,7 @@ public class ClientWebClientImpl implements Client {
         }catch (WebClientResponseException e) {
             System.out.println(e.getResponseBodyAsString());
             // TODO
-            return null;
+            return new CreateFunctionOutput();
         }
     }
 
@@ -61,7 +60,7 @@ public class ClientWebClientImpl implements Client {
         }catch (WebClientResponseException e) {
             System.out.println(e.getResponseBodyAsString());
             // TODO
-            return null;
+            return new Function();
         }
     }
 
@@ -77,7 +76,7 @@ public class ClientWebClientImpl implements Client {
         }catch (WebClientResponseException e) {
             System.out.println(e.getResponseBodyAsString());
             // TODO
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -94,7 +93,7 @@ public class ClientWebClientImpl implements Client {
         }catch (WebClientResponseException e) {
             System.out.println(e.getResponseBodyAsString());
             // TODO
-            return null;
+            return new InvokeFunctionOutput(400, null);
         }
     }
 
@@ -112,7 +111,7 @@ public class ClientWebClientImpl implements Client {
         }catch (WebClientResponseException e) {
             System.out.println(e.getResponseBodyAsString());
             // TODO
-            return null;
+            return new DeleteFunctionOutput();
         }
     }
 
