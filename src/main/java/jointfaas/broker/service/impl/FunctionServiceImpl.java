@@ -4,10 +4,7 @@ import jointfaas.broker.configuration.AppConfig;
 import jointfaas.broker.service.FunctionService;
 import jointfaas.client.Client;
 import jointfaas.client.impl.ClientWebClientImpl;
-import jointfaas.client.pojo.CreateFunctionInput;
-import jointfaas.client.pojo.DeleteFunctionInput;
-import jointfaas.client.pojo.Function;
-import jointfaas.client.pojo.InvokeFunctionInput;
+import jointfaas.client.pojo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -63,7 +60,12 @@ public class FunctionServiceImpl implements FunctionService {
 
     @Override
     public byte[] invokeFunction(String funcName, String args, String enableNative) {
-        return clients.firstElement().invokeFunction(new InvokeFunctionInput(funcName, args, enableNative)).getResponse();
+        InvokeFunctionOutput invokeFunctionOutput = clients.firstElement().invokeFunction(new InvokeFunctionInput(funcName, args, enableNative));
+        if (invokeFunctionOutput.getStatus() == 200) {
+            return invokeFunctionOutput.getResponse();
+        } else {
+            return invokeFunctionOutput.getErrMsg().getBytes();
+        }
     }
 
     @Override

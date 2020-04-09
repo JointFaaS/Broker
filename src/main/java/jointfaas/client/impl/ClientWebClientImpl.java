@@ -93,7 +93,7 @@ public class ClientWebClientImpl implements Client {
         }catch (WebClientResponseException e) {
             System.out.println(e.getResponseBodyAsString());
             // TODO
-            return new InvokeFunctionOutput(400, null);
+            return new InvokeFunctionOutput(400, e.getResponseBodyAsString());
         }
     }
 
