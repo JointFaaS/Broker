@@ -1,9 +1,6 @@
 package jointfaas.broker.controller;
 
-import jointfaas.broker.controller.pojo.FunctionCreationRequest;
-import jointfaas.broker.controller.pojo.FunctionCreationResponse;
-import jointfaas.broker.controller.pojo.FunctionInvocationRequest;
-import jointfaas.broker.controller.pojo.FunctionResponse;
+import jointfaas.broker.controller.pojo.*;
 import jointfaas.broker.service.FunctionService;
 import jointfaas.client.pojo.Function;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +73,15 @@ public class FunctionController {
     public FunctionResponse getFunction() {
         FunctionResponse response = new FunctionResponse();
         response.setFunctions(functionService.getFunctions());
+        return response;
+    }
+
+    @GetMapping("/functionCode/{id}")
+    @ResponseBody
+    public FunctionCodeResponse getFunctionCode(@PathVariable String id) {
+        FunctionCodeResponse response = new FunctionCodeResponse();
+        response.setCodeZipLink(functionService.getFunctionCode(id));
+        response.setStatus(200);
         return response;
     }
 }

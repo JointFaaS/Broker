@@ -97,4 +97,9 @@ public class FunctionServiceImpl implements FunctionService {
     public void setManagerPrice(String name, double price) {
 
     }
+
+    @Override
+    public String getFunctionCode(String id) {
+        return null;
+    }
 }

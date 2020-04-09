@@ -1,19 +1,13 @@
 package jointfaas.client.impl;
 
-import com.alibaba.fastjson.support.spring.FastjsonSockJsMessageCodec;
 import jointfaas.client.Client;
 import jointfaas.client.pojo.*;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.BodyExtractors;
 import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import java.net.URL;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,7 +53,9 @@ public class ClientWebClientImpl implements Client {
                     .block();
         }catch (WebClientResponseException e) {
             System.out.println(e.getResponseBodyAsString());
-            // TODO
+            return new Function();
+        }catch (Exception e) {
+            e.printStackTrace();
             return new Function();
         }
     }
@@ -76,6 +72,9 @@ public class ClientWebClientImpl implements Client {
         }catch (WebClientResponseException e) {
             System.out.println(e.getResponseBodyAsString());
             // TODO
+            return new ArrayList<>();
+        }catch (Exception e) {
+            e.printStackTrace();
             return new ArrayList<>();
         }
     }
@@ -113,6 +112,11 @@ public class ClientWebClientImpl implements Client {
             // TODO
             return new DeleteFunctionOutput();
         }
+    }
+
+    @Override
+    public GetFunctionCodeOutput getFunctionCode(String id) {
+        return null;
     }
 
 }

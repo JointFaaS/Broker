@@ -15,4 +15,6 @@ public interface Client {
     InvokeFunctionOutput invokeFunction(InvokeFunctionInput invokeFunctionInput);
 
     DeleteFunctionOutput deleteFunction(DeleteFunctionInput deleteFunctionInput);
+
+    GetFunctionCodeOutput getFunctionCode(String id);
 }

@@ -19,4 +19,6 @@ public interface FunctionService {
     void refreshManagerState();
 
     void setManagerPrice(String name, double price);
+
+    String getFunctionCode(String id);
 }
