@@ -9,7 +9,7 @@ public class FunctionResponse{
 	@JSONField(name="functions")
 	private List<Function> functions;
 
-	@JSONField(name="status")
+	@JSONField(name="ResStatus")
 	private int status;
 
 	public void setFunctions(List<Function> functions){
@@ -33,7 +33,7 @@ public class FunctionResponse{
 		return 
 			"FunctionResponse{" + 
 			"functions = '" + functions + '\'' + 
-			",status = '" + status + '\'' + 
+			",ResStatus = '" + status + '\'' +
 			"}";
 		}
 }

@@ -4,6 +4,15 @@ public class FunctionInvocationRequest {
     private String funcName;
     private String args;
     private String enableNative;
+    private String addr;
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
 
     public String getEnableNative() {
         return enableNative;

@@ -1,5 +1,6 @@
 package jointfaas.broker.service;
 
+import jointfaas.broker.backend.Backend;
 import jointfaas.client.pojo.Function;
 
 import java.nio.ByteBuffer;
@@ -16,9 +17,9 @@ public interface FunctionService {
 
     void deleteFunction(String funcName) throws Exception;
 
-    void refreshManagerState();
+    void updateBackend(String addr, Long price, Long latency, Long priority, boolean active);
 
-    void setManagerPrice(String name, double price);
+    List<Backend> getBackends();
 
     String getFunctionCode(String id);
 }
