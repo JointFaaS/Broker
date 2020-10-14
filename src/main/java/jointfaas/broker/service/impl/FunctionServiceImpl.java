@@ -62,6 +62,7 @@ public class FunctionServiceImpl implements FunctionService {
     public byte[] invokeFunction(String funcName, String args, String enableNative) {
         InvokeFunctionOutput invokeFunctionOutput = clients.firstElement().invokeFunction(new InvokeFunctionInput(funcName, args, enableNative));
         if (invokeFunctionOutput.getStatus() == 200) {
+            System.out.println("[liu] Get response succeed: " + new String(invokeFunctionOutput.getResponse()) + "\n\n");
             return invokeFunctionOutput.getResponse();
         } else {
             return invokeFunctionOutput.getErrMsg().getBytes();
